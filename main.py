@@ -1,16 +1,15 @@
-# This is a sample Python script.
+from blanks_processor import BlanksProcessor
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    while True:
+        user_input = input('Please write a phrase with underscores to represent blanks:\n')
+        if user_input == "q":
+            break
+        number_of_blanks = user_input.count("_")
+        list_of_arguments = []
+        for x in range(0, number_of_blanks):
+            new_argument = input("Please input word to replace:\n")
+            list_of_arguments.append(new_argument)
+        bp = BlanksProcessor(user_input)
+        print(bp.get_filled_string(list_of_arguments))
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
