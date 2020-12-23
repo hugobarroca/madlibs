@@ -3,7 +3,7 @@ from input_parser import InputParser
 
 if __name__ == '__main__':
     ip = InputParser()
-    bp = BlanksProcessor(ip.user_input, ip.words_to_replace)
+    bp = BlanksProcessor(ip.phrase_with_blanks, ip.words_to_replace)
     print(bp.get_filled_string())
 
 
