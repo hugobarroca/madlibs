@@ -9,7 +9,6 @@ class InputParser:
         self.get_phrase_with_blanks()
         self.get_words_to_replace()
 
-
     def get_phrase_with_blanks(self):
         while not self.input_is_valid():
             self.phrase_with_blanks = input('Please write a phrase with underscores to represent blanks:\n')
