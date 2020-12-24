@@ -1,3 +1,4 @@
+# This class replaces the underscores on a given string with the appropriate given arguments.
 class BlanksProcessor:
     def __init__(self, string_with_blanks, list_of_arguments):
         self.string_with_blanks = string_with_blanks
