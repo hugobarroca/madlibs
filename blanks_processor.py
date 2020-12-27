@@ -1,11 +1,16 @@
 # This class replaces the underscores on a given string with the appropriate given arguments.
 class BlanksProcessor:
-    def __init__(self, string_with_blanks, list_of_arguments):
-        self.string_with_blanks = string_with_blanks
-        self.list_of_arguments = list_of_arguments
+    def __init__(self, phrases, words):
+        self.phrases = phrases
+        self.words = words
 
     def get_filled_string(self):
-        temp_string = self.string_with_blanks
-        for arg in self.list_of_arguments:
-            temp_string = temp_string.replace("_", str(arg), 1)
+        temp_string = ''
+        nr_phrases = len(self.phrases)
+
+        for x in range(0, nr_phrases):
+            if x != nr_phrases - 1:
+                temp_string += self.phrases[x] + self.words[x]
+            else:
+                temp_string += self.phrases[x]
         return temp_string
