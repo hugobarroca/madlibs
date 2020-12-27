@@ -11,24 +11,17 @@ class InputParser:
         self.words_to_replace = []
 
     def get_input(self):
-        user_input = input("Enter 1 to get a randomly generated phrase from the API,"
-                           " or 2 to enter a phrase yourself:\n")
+        user_input = input("Enter 1 to enter a phrase yourself, or 2 to get a randomly generated phrase from the API."
+                           " Enter \"q\" to quit:\n")
         if user_input == "1":
-            self.get_input_from_the_api()
-        elif user_input == "2":
             self.get_input_from_the_user()
-        else:
+        elif user_input == "2":
+            self.get_input_from_the_api()
+        elif user_input == "q":
             sys.exit()
-
-    def get_input_from_the_api(self):
-        response = requests.get("http://madlibz.herokuapp.com/api/random?minlength=5&maxlength=13").json()
-        print(response)
-        list_of_phrases = response["value"]
-        list_of_blanks = response["blanks"]
-        nr_phrases = len(list_of_phrases)
-        nr_blanks = len(list_of_blanks)
-        if nr_phrases == nr_blanks:
-            pass
+        else:
+            print("Unrecognized input. Quiting...")
+            sys.exit()
 
     def get_input_from_the_user(self):
         self.fill_list_of_phrases()
@@ -46,3 +39,17 @@ class InputParser:
         for x in range(0, number_of_blanks):
             new_word = input("Please input word to replace:\n")
             self.words_to_replace.append(new_word)
+
+    def get_input_from_the_api(self):
+        response = requests.get("http://madlibz.herokuapp.com/api/random?minlength=5&maxlength=13").json()
+        self.phrases = response["value"]
+        self.phrases.pop()
+        blanks = response["blanks"]
+        self.fill_words_to_replace_api(blanks)
+
+    def fill_words_to_replace_api(self, blanks):
+        self.words_to_replace = []
+        for phrase in blanks:
+            word = input(f"Please enter a {phrase}:\n")
+            self.words_to_replace.append(word)
+
